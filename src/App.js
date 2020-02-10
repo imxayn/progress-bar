@@ -1,15 +1,27 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'
+import { makeStyles } from '@material-ui/core/styles';
+
 
 import './App.css';
+import { LinearProgress, Grid } from '@material-ui/core';
+
+const useStyles = makeStyles(theme => ({
+  main:{
+    padding:200
+  }
+}));
 
 function App() {
+  const classes = useStyles();
   const [button, setButton] = useState([])
   const [bar, setBar] = useState([])
   const [limit, setLimit] = useState()
+  const [value, setValue] = useState()
   
   const handleButton = event => {
     console.log(event.target.value)
+    setValue(event.target.value)
   }
 
   
@@ -25,22 +37,38 @@ function App() {
    }, []);
 
   return (
+    <Grid
+    container
+    direction="row"
+    justify="center"
+    alignItems="center"
+    className={classes.main}
+  >
+    
    <div style={{textAlign: 'center'}}>
-      Progress Bar
+      <h4>Progress Bar</h4>
       <br />
+   
+    <LinearProgress value={+value} valueBuffer={0} variant="determinate"/>
+    <br />
+    <LinearProgress value={value} valueBuffer={0} variant="determinate"/>
+    <br />
+    <LinearProgress value={value} valueBuffer={0} variant="determinate"/>
+    <br />
+    <select>
+    <option value="progress1">progress 1</option>
+    <option value="progress2">progress 2</option>
+    <option value="progress3"> progress 3</option>
+  </select>
+
     {button&& button.map(btn => (
-      
-      <button onClick = {handleButton}>{btn}</button>
-        
+      <input type="button" name="name" value={btn} onClick={handleButton}/>
     ))}
-    {console.log(bar,'bar')}
-    <select>{bar.map(br => (
-      <option>{br}</option>
-    ))}</select>
 
     {console.log(limit,'limit!')}
    
    </div>
+   </Grid>
   );
 }
 
