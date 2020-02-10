@@ -37,6 +37,8 @@ function App() {
     <select>{bar.map(br => (
       <option>{br}</option>
     ))}</select>
+
+    {console.log(limit,'limit!')}
    
    </div>
   );
