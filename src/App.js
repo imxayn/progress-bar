@@ -21,6 +21,9 @@ function App() {
   
   const handleButton = event => {
     console.log(event.target.value)
+    
+    
+    
     setValue(event.target.value)
   }
 
@@ -44,22 +47,38 @@ function App() {
     alignItems="center"
     className={classes.main}
   >
-    
    <div style={{textAlign: 'center'}}>
       <h4>Progress Bar</h4>
       <br />
    
-    <LinearProgress value={+value} valueBuffer={0} variant="determinate"/>
-    <br />
-    <LinearProgress value={value} valueBuffer={0} variant="determinate"/>
-    <br />
-    <LinearProgress value={value} valueBuffer={0} variant="determinate"/>
-    <br />
-    <select>
-    <option value="progress1">progress 1</option>
-    <option value="progress2">progress 2</option>
-    <option value="progress3"> progress 3</option>
-  </select>
+  <div className="progress">
+    <div className="progress-bar" role="progressbar" aria-valuenow={value} aria-valuemin="0" aria-valuemax="100" style={{width: `${value}%`}}>
+    {value > 0 && (
+      <span>{value}%</span>
+    )}  
+    </div>
+  </div>
+  <div className="progress">
+    <div className="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style={{width: `${value}%`}}>
+    {value > 0 && (
+      <span>{value}%</span>
+    )}  
+    </div>
+  </div>
+  <div className="progress">
+    <div className="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style={{width: `${value}%`}}>
+    {value > 0 && (
+      <span>{value}%</span>
+    )}  
+   
+    </div>
+  </div>
+  <select>
+  <option value="progress1">progress 1</option>
+  <option value="progress2">progress 2</option>
+  <option value="progress3"> progress 3</option>
+</select>
+
 
     {button&& button.map(btn => (
       <input type="button" name="name" value={btn} onClick={handleButton}/>
