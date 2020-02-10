@@ -1,25 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios'
+
 import './App.css';
 
 function App() {
+  const [button, setButton] = useState([])
+  const [bar, setBar] = useState([])
+  const [limit, setLimit] = useState()
+  
+  const handleButton = (e) => {
+    console.log(e)
+  }
+
+  useEffect(async () => {
+    const response = await axios.get('http://pb-api.herokuapp.com/bars')
+    setButton(response.data.buttons)
+    setBar(response.data.bars)
+    setLimit(response.data.limit)
+   }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+   <div style={{textAlign: 'center'}}>
+      Progress Bar
+      <br />
+    {button.map(btn => (
+      
+      <button onClick = { (e) => handleButton(e)}>{btn}</button>
+        
+    ))}
+   
+   </div>
   );
 }
 
