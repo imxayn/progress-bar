@@ -8,26 +8,35 @@ function App() {
   const [bar, setBar] = useState([])
   const [limit, setLimit] = useState()
   
-  const handleButton = (e) => {
-    console.log(e)
+  const handleButton = event => {
+    console.log(event.target.value)
   }
 
-  useEffect(async () => {
+  
+
+  useEffect( () => {
+    async function fetchData(){
     const response = await axios.get('http://pb-api.herokuapp.com/bars')
     setButton(response.data.buttons)
     setBar(response.data.bars)
     setLimit(response.data.limit)
+    }
+    fetchData()
    }, []);
 
   return (
    <div style={{textAlign: 'center'}}>
       Progress Bar
       <br />
-    {button.map(btn => (
+    {button&& button.map(btn => (
       
-      <button onClick = { (e) => handleButton(e)}>{btn}</button>
+      <button onClick = {handleButton}>{btn}</button>
         
     ))}
+    {console.log(bar,'bar')}
+    <select>{bar.map(br => (
+      <option>{br}</option>
+    ))}</select>
    
    </div>
   );
