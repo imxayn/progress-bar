@@ -17,17 +17,14 @@ function App() {
   const [button, setButton] = useState([])
   const [bar, setBar] = useState([])
   const [limit, setLimit] = useState()
-  const [value, setValue] = useState()
+  //const [value, setValue] = useState()
 
   const progressBar = [1, 2, 3]
 
   const handleButton = (event) => {
-    //setBar(event.target.value)
-    //setValue(event.target.value + value)
-    const val = event.target.value
-    console.log(val,'val!')
-    bar.map(num => num + val)
-    console.log(bar.map(num => num + val),'bars...')
+    const value = parseInt(event.target.value)
+    setBar(bar.map(num => num + value))
+
   }
 
 
@@ -37,7 +34,7 @@ function App() {
       const response = await axios.get('http://pb-api.herokuapp.com/bars')
       console.log(response)
       setButton(response.data.buttons)
-      setBar(response.data.bars.slice(0,3))
+      setBar(response.data.bars.slice(0, 3))
       setLimit(response.data.limit)
     }
     fetchData()
@@ -56,13 +53,13 @@ function App() {
       <div style={{ textAlign: 'center' }}>
         <h4>Progress Bar</h4>
         <br />
-        {bar && bar.map((num,index) => (
+        {bar && bar.map((num, index) => (
           <>
-          <div className="w3-border">
-          <div className="w3-blue" style={{ height: 24, width: `${num}%`, background: 'red' }}>
-            <span>{num}%</span>
-          </div>
-          </div>
+            <div className="w3-border">
+              <div className="w3-blue" style={{ height: 24, width: `${num}%`, background: 'red', maxWidth: `${limit}%` }}>
+                <span>{num}%</span>
+              </div>
+            </div>
           </>
         ))}
         <br />
@@ -74,11 +71,11 @@ function App() {
           <option value="progress3"> progress 3</option>
         </select>
 
-        {button && button.map((btn,index) => (
-          <input type="button" name="name" value={btn} onClick={ handleButton} />
+        {button && button.map((btn, index) => (
+          <input type="button" name="name" value={btn} onClick={handleButton} />
         ))}
 
-        
+
 
       </div>
     </Grid>
