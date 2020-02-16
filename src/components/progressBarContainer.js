@@ -3,6 +3,13 @@ import axios from 'axios'
 import Buttons from './buttons'
 import BarSelector from './barSelector'
 import Bars from './bars'
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+    text-align: center;
+    border: 2px solid gray
+`
+
 
 function ProgressBarContainer() {
     const [limit, setLimit] = useState(0);
@@ -47,18 +54,14 @@ function ProgressBarContainer() {
     }
 
     return (
-        <div style={{ textAlign: 'center', border: '2px solid gray' }}>
+        <Wrapper>
             <h4>Progress Bar</h4>
             <br />
             <Bars bars={progressBars} limit={limit} />
             <br />
             <BarSelector bars={progressBars} handleChange={handleChange} />
             <Buttons data={buttons} handleClick={handleAdd} />
-               
-            
-
-
-        </div >
+        </Wrapper >
 
     )
 
