@@ -3,37 +3,23 @@ import axios from 'axios'
 
 function ProgressBar() {
     const [limit, setLimit] = useState(0);
-    const [progressBars, setProgressBar] = useState([
-        {
-            index: 1,
-            value: null,
-            selected: true,
-            selectOption: 'Progress Bar 1'
-        },
-        {
-            index: 2,
-            value: null,
-            selected: false,
-            selectOption: 'Progress Bar 2'
-        },
-        {
-            index: 3,
-            value: null,
-            selected: false,
-            selectOption: 'Progress Bar 3'
-        },
-    ]);
+    const [progressBars, setProgressBar] = useState([]);
     const [buttons, setButtons] = useState([]);
 
     useEffect(() => {
         async function fetchData() {
             const response = await axios.get('http://pb-api.herokuapp.com/bars');
             const { buttons, limit, bars } = response.data;
-            const mapBarsValues = progressBars.map((bar, index) => {
-                bar.value = bars[index]
-                return bar;
-            });
-            setProgressBar(mapBarsValues);
+            bars.map((bar, index) => {
+                progressBars.push(
+                    {
+                        index: index,
+                        value: bar,
+                        selected: index === 0 ? true : false,
+                        selectOption: `Progress Bar ${index + 1}`
+                    }
+                )
+            })
             setButtons(buttons);
             setLimit(limit);
         }
@@ -58,27 +44,31 @@ function ProgressBar() {
     }
 
     return (
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: 'center', border: '2px solid gray' }}>
             <h4>Progress Bar</h4>
             <br />
+            <div style={{display: 'flex', flexDirection: 'column',alignItems:'center'}}>
             {progressBars.map(bar => (
-                <div className="w3-border" style={{ width: `${limit}px` }}>
-                    <div  style={{ height: 24, width: `${bar.value > 0 ? bar.value : 0}px`, backgroundColor: bar.value > limit ? 'red' : '#2196F3', maxWidth: `${limit}px`, minWidth: 0 }}>
-                        <span>{bar.value > 0 ? `${bar.value}%` : 0}</span>
+                <div className="w3-border" style={{ width: `${limit}px`}}>
+                    <div style={{ height: 24, width: `${bar.value > 0 ? bar.value : 0}px`, backgroundColor: bar.value > limit ? 'orangered' : '#2196F3', maxWidth: `${limit}px`, minWidth: 0 }}>
+                        <span>{bar.value > 0 ? `${bar.value}%` : ''}</span>
                     </div>
 
                 </div>
             ))}
+            </div>
             <br />
-            <div style={{ marginRight: 5 }}>
-                <select onChange={e => handleChange(e)}>
+            <div style={{marginLeft: 2}}>
+                <span style={{marginRight:176, fontWeight: 600}}>Select option:</span>
+                <br />
+                <select onChange={e => handleChange(e)} style={{ marginRight: 5 }}>
                     {progressBars && progressBars.map(bar => (
                         <option value={bar.index}>{bar.selectOption}</option>
                     ))}
                 </select>
 
                 {buttons.map(b => (
-                    <input type="button" name="name" value={b} onClick={() => handleAdd(b)} />
+                    <input type="button" name="name" style={{ marginRight: 2, marginBottom: 2 }} value={b} onClick={() => handleAdd(b)} />
                 ))}
 
             </div>

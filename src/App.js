@@ -13,7 +13,9 @@ function App() {
       justify="center"
       alignItems="center"
     >
+   
     <ProgressBar /> 
+    
     
       
     </Grid>
