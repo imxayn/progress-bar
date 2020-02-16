@@ -1,10 +1,10 @@
 import React from 'react';
-import ProgressBar from './components/progressBar'
+import ProgressBarContainer from './components/progressBarContainer'
 import { Grid } from '@material-ui/core';
 
 
 function App() {
-  
+
 
   return (
     <Grid
@@ -13,11 +13,11 @@ function App() {
       justify="center"
       alignItems="center"
     >
-   
-    <ProgressBar /> 
-    
-    
-      
+
+      <ProgressBarContainer />
+
+
+
     </Grid>
   );
 }

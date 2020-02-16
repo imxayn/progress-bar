@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios'
+import Buttons from './buttons'
+import BarSelector from './barSelector'
+import Bars from './bars'
 
-function ProgressBar() {
+function ProgressBarContainer() {
     const [limit, setLimit] = useState(0);
     const [progressBars, setProgressBar] = useState([]);
     const [buttons, setButtons] = useState([]);
@@ -47,37 +50,19 @@ function ProgressBar() {
         <div style={{ textAlign: 'center', border: '2px solid gray' }}>
             <h4>Progress Bar</h4>
             <br />
-            <div style={{display: 'flex', flexDirection: 'column',alignItems:'center'}}>
-            {progressBars.map(bar => (
-                <div className="w3-border" style={{ width: `${limit}px`}}>
-                    <div style={{ height: 24, width: `${bar.value > 0 ? bar.value : 0}px`, backgroundColor: bar.value > limit ? 'orangered' : '#2196F3', maxWidth: `${limit}px`, minWidth: 0 }}>
-                        <span>{bar.value > 0 ? `${bar.value}%` : ''}</span>
-                    </div>
-
-                </div>
-            ))}
-            </div>
+            <Bars bars={progressBars} limit={limit} />
             <br />
-            <div style={{marginLeft: 2}}>
-                <span style={{marginRight:176, fontWeight: 600}}>Select option:</span>
-                <br />
-                <select onChange={e => handleChange(e)} style={{ marginRight: 5 }}>
-                    {progressBars && progressBars.map(bar => (
-                        <option value={bar.index}>{bar.selectOption}</option>
-                    ))}
-                </select>
+            <BarSelector bars={progressBars} handleChange={handleChange} />
+            <Buttons data={buttons} handleClick={handleAdd} />
+               
+            
 
-                {buttons.map(b => (
-                    <input type="button" name="name" style={{ marginRight: 2, marginBottom: 2 }} value={b} onClick={() => handleAdd(b)} />
-                ))}
-
-            </div>
 
         </div >
 
     )
 
 }
-export default ProgressBar;
+export default ProgressBarContainer;
 
 
