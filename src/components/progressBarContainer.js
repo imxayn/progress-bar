@@ -50,9 +50,8 @@ function ProgressBarContainer() {
             return bar;
         })
         setProgressBar(mapBarsValues);
-
     }
-
+    
     return (
         <Wrapper>
             <h4>Progress Bar</h4>
@@ -62,9 +61,7 @@ function ProgressBarContainer() {
             <BarSelector bars={progressBars} handleChange={handleChange} />
             <Buttons data={buttons} handleClick={handleAdd} />
         </Wrapper >
-
     )
-
 }
 export default ProgressBarContainer;
 
