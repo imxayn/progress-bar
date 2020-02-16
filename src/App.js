@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios'
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
 import ProgressBar from './components/progressBar'
 import { Grid } from '@material-ui/core';
 
@@ -14,7 +12,6 @@ function App() {
       direction="row"
       justify="center"
       alignItems="center"
-    //className={classes.main}
     >
     <ProgressBar /> 
     
