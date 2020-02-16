@@ -1,5 +1,4 @@
-git clone git@github.com:imxayn/progress-bar.git
-
+git clone git@github.com:imxayn/test-tht.git
 npm install
 
 npm start
