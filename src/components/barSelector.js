@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types';
 
 
-const Option = styled.span`
+const Option = styled.option`
     margin-right: 176px;
     font-weight: 600
 `
@@ -16,10 +16,9 @@ const Select = styled.select`
     return (
         <>
         <Option>Select option:</Option>
-                <br />
                 <Select onChange={e => handleChange(e)} >
                     {bars && bars.map(bar => (
-                        <option value={bar.index}>{bar.selectOption}</option>
+                        <Option value={bar.index}>{bar.selectOption}</Option>
                     ))}
                 </Select>
         </>
